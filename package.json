@@ -1,0 +1,12 @@
+{
+  "name": "domain-project",
+  "version": "0.0.1",
+  "description": "Domain Flipping & Management Suite — monorepo root",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"node backend/server.js\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
