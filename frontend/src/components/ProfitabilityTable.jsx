@@ -161,8 +161,9 @@ export function ProfitabilityTable({ results = [], selectedDomains, onSelectionC
                     <input
                       type="checkbox"
                       checked={!!isSelected}
+                      disabled={!row.available}
                       onChange={(e) => onSelectionChange?.(row.domain, e.target.checked)}
-                      className="w-4 h-4 accent-[#6c63ff] cursor-pointer"
+                      className="w-4 h-4 accent-[#6c63ff] cursor-pointer disabled:cursor-not-allowed disabled:opacity-30"
                     />
                   </td>
 
@@ -193,15 +194,19 @@ export function ProfitabilityTable({ results = [], selectedDomains, onSelectionC
 
                   {/* Action */}
                   <td className="px-4 py-3">
-                    <button
-                      type="button"
-                      onClick={() => onSelectionChange?.(row.domain, true)}
-                      disabled={!!isSelected}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-[#6c63ff]/10 text-[#6c63ff] border border-[#6c63ff]/20 hover:bg-[#6c63ff]/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                    >
-                      <PlusCircle size={12} />
-                      Add
-                    </button>
+                    {row.available ? (
+                      <button
+                        type="button"
+                        onClick={() => onSelectionChange?.(row.domain, true)}
+                        disabled={!!isSelected}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-[#6c63ff]/10 text-[#6c63ff] border border-[#6c63ff]/20 hover:bg-[#6c63ff]/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <PlusCircle size={12} />
+                        Add
+                      </button>
+                    ) : (
+                      <span className="text-xs text-[#ff4757]/60 font-medium">Unavailable</span>
+                    )}
                   </td>
                 </tr>
               );
