@@ -252,10 +252,14 @@ app.post('/api/domains/cache/clear', (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Start Server
+// Start Server (only when run directly, not as serverless function)
 // ═══════════════════════════════════════════════════════════════════════════
-app.listen(PORT, () => {
-  console.log(`🚀 Domain Suite API running on http://localhost:${PORT}`);
-  console.log(`📋 Provider status: GET /api/domains/providers`);
-  console.log(`🔄 Clear cache: POST /api/domains/cache/clear`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Domain Suite API running on http://localhost:${PORT}`);
+    console.log(`📋 Provider status: GET /api/domains/providers`);
+    console.log(`🔄 Clear cache: POST /api/domains/cache/clear`);
+  });
+}
+
+module.exports = app;
